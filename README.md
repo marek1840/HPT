@@ -23,12 +23,12 @@ HPT
 #### On Windows
 1. Install node.js and npm:
  * download node.js installer from [here](http://www.nodejs.org). 
-2. Instal Yeoman (yo + grunt + bower).
+2. Install Yeoman (yo + grunt + bower).
 
  ```
  npm install -g yo
  ```
-3. Instal MongoDB.
+3. Install MongoDB.
  * download MongoDB installer from [here](http://mongodb.org/downloads).
 
 ### How to run it
