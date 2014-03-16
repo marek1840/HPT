@@ -19,6 +19,7 @@ HPT
  ```
  sudo apt-get install mongodb
  ```
+ 
 #### On Windows
 1. Install node.js and npm:
  * download node.js installer from [here](http://www.nodejs.org). 
