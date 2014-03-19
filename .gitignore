@@ -1,8 +1,8 @@
-node_modules
-public
-.tmp
-.sass-cache
-app/bower_components
-heroku
-/views
-dist
+server/node_modules
+server/public
+server/.tmp
+server/.sass-cache
+server/app/bower_components
+server/heroku
+server//views
+server/dist
