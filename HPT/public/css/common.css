@@ -3,11 +3,16 @@
     margin-left:0
 }
 
+
 .content {
-    margin-top:70px;
+    margin-top:5%;
     width:100%
 }
 
+
+.col-centered{
+    margin: 10 auto;
+}
 footer {
     position:fixed;
     left:0;

@@ -55,13 +55,12 @@ exports.create = function(req, res, next) {
     var user = new User(req.body);
     var message = null;
 
-    user.provider = 'local';
     user.save(function(err) {
         if (err) {
             switch (err.code) {
                 case 11000:
                 case 11001:
-                    message = 'Username already exists';
+                    message = 'Username already exists with ';
                     break;
                 default:
                     message = 'Please fill all the required fields';
@@ -87,11 +86,10 @@ exports.me = function(req, res) {
 };
 
 /**
- * Find user by id
+ * Find user by email
  */
 exports.user = function(req, res, next, id) {
-    User
-        .findOne({
+    User.findOne({
             _id: id
         })
         .exec(function(err, user) {
