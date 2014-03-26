@@ -56,6 +56,7 @@ angular.module('mean.system').controller('PurchaseController', ['$scope', '$http
 					company: companyName,
 					amount: amount
 				}).success(function(data){
+					$scope.res = data
 					$scope.purchased[companyName] = amount;
 				})
 			}
