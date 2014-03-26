@@ -3,15 +3,20 @@
 angular.module('mean.system').controller('PurchaseController', ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
 	$scope.global = Global;
 
-	$scope.v = 0;
+	$scope.industryPrefix = "";
+
+	$scope.startsWithPrefix = function(industry){
+		$scope.query = industry;
+		return industry.startsWith(industryPrefix);
+	}
 
 	$http.get("/companies.json").success(function(data){
 
 		$scope.industries = data.reduce(function(acc, company){
-		    acc[company.industry] = true;
+			    acc[company.industry] = true;
 		    return acc;
 		}, {});
-	
+
     	$scope.companies = function() {
 	  		return data.filter(function(company){
 	  	 		return $scope.industries[company.industry];
@@ -56,7 +61,6 @@ angular.module('mean.system').controller('PurchaseController', ['$scope', '$http
 					company: companyName,
 					amount: amount
 				}).success(function(data){
-					$scope.res = data
 					$scope.purchased[companyName] = amount;
 				})
 			}
@@ -75,5 +79,7 @@ angular.module('mean.system').controller('PurchaseController', ['$scope', '$http
 	$scope.showPurchased = function(companyName){
 		return $scope.purchased[companyName] > 0;
 	}
+
+
 
 }]);
