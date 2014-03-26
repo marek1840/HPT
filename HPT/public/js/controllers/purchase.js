@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('mean.system').controller('PurchaseController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
+angular.module('mean.system').controller('PurchaseController', ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
 	$scope.global = Global;
+
+	$scope.v = 0;
 
 	$http.get("/companies.json").success(function(data){
 
@@ -38,5 +40,39 @@ angular.module('mean.system').controller('PurchaseController', ['$scope', '$http
 	// 	stockPrice: 31,
 	// 	difference: -44
 	// }];
+
+	var form = {
+		amount: 0
+	};
+
+	$scope.purchased = {
+		comp1: 10
+	}
+
+	$scope.purchase = function(companyName){
+		return function(amount){
+			if(amount > 0){
+				$http.post("/purchase", {
+					company: companyName,
+					amount: amount
+				}).success(function(data){
+					$scope.purchased[companyName] = amount;
+				})
+			}
+		}
+	}
+
+	$scope.purchased = function(companyName){
+		var amount = $scope.purchased[companyName];
+		if (amount > 0){
+			return amount;
+		}else{
+			return Nothing
+		}
+	}
+
+	$scope.showPurchased = function(companyName){
+		return $scope.purchased[companyName] > 0;
+	}
 
 }]);

@@ -1,24 +1,29 @@
 <section data-ng-controller="PurchaseController">
-
-
-	<section class="" ng-repeat="(key, value) in industries">
-	<div>
-		<input type="checkbox" ng-model="industries[key]" ng-change="filterCompanies(key, val)"> {{key}} = {{value}}
+<div class="row">
+	<section class="col-sm-2" >
+	<div ng-repeat="(industry, value) in industries">
+		<input type="checkbox" ng-model="industries[industry]" ng-change="filterCompanies(industry, val)"> {{industry}}
 	</div>
 
 	</section>
 
-	<section ng-repeat="company in companies()">
-		<div class="row">
-			<div class="col-xs-2">{{company.name}}</div>
+	<section class="col-xs-8" >
+		<div class="row" ng-repeat="company in companies()">
+			<div class="col-xs-3">{{company.name}}</div>
 			<div class="col-xs-1">{{company.difference}}</div>
 			<div class="col-xs-1">{{company.stockPrice}}</div>
-			<form action="" method="">
+			<form class="form-horizontal col-xs-4" ng-submit="purchase(company.name)(v)">
+				<input  type="number" name="amount" value="0" ng-model="v">
+				<button>Buy</button>
 			</form>
-			<button>Buy</button>
+			<div class="col-xs-2 alert alert-success" ng-show="showPurchased(company.name)">
+				{{purchased(company.name)}}
+			</div>
 		</div>
 	</section>
+</div>
 
+	
 	
 </section>
 
