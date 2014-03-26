@@ -8,6 +8,10 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
 
     // states for my app
     $stateProvider
+      .state('all industries', {
+        url: '/purchase',
+        templateUrl: 'views/purchase/purchase.html'
+      })
       .state('all articles', {
         url: '/articles',
         templateUrl: 'views/articles/list.html'
@@ -34,6 +38,6 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
 //Setting HTML5 Location Mode
 angular.module('mean').config(['$locationProvider',
   function($locationProvider) {
-    $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('');
 }
 ]);
