@@ -8,9 +8,8 @@
 		<label>find</label>	
 		<input type="text" ng-model="industryPrefix">
 	</div>
-	
-	<div ng-repeat="(industry, _) in industries |filter:(industry.startsWith(industryPrefix.toLowerCase()))" >
-
+	<div ng-repeat="industry in ind()" ng-show="industry.indexOf(industryPrefix) === 0" >
+	{{industry.indexOf('in')}} -- {{v}}
 		<div class="col-md-2"></div>
 		<input type="checkbox" ng-model="industries[industry]" ng-change="filterCompanies(industry, val)" > <label>{{industry }} </label>
 
@@ -28,7 +27,7 @@
 			<label class="col-md-1">amount</label>
 		</div>
 
-		<div class="row" ng-repeat="company in companies()">
+		<div class="row" ng-repeat="company in companies() ">
 
 			<div class="col-md-2">{{company.name}}</div>
 			<div class="col-md-1">{{company.difference}}</div>
@@ -42,10 +41,9 @@
 			</div>
 			</form>
 
-			
+
 		</div>
 	</section>
 </div>
-	
-</section>
 
+</section>

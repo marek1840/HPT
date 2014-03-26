@@ -3,11 +3,10 @@
 angular.module('mean.system').controller('PurchaseController', ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
 	$scope.global = Global;
 
-	$scope.industryPrefix = "";
+	$scope.industryPrefix = ''
 
 	$scope.startsWithPrefix = function(industry){
-		$scope.query = industry;
-		return industry.startsWith(industryPrefix);
+		return true;
 	}
 
 	$http.get("/companies.json").success(function(data){
@@ -16,6 +15,13 @@ angular.module('mean.system').controller('PurchaseController', ['$scope', '$http
 			    acc[company.industry] = true;
 		    return acc;
 		}, {});
+
+		$scope.ind = function(){
+			var keys = []
+			for(var k in $scope.industries) 
+				keys.push(k)
+			return keys
+		}
 
     	$scope.companies = function() {
 	  		return data.filter(function(company){

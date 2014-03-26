@@ -11,7 +11,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
       .state('all industries', {
         url: '/purchase',
         templateUrl: 'views/purchase/purchase.html'
-      })
+    })
       .state('all articles', {
         url: '/articles',
         templateUrl: 'views/articles/list.html'
