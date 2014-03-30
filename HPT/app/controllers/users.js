@@ -4,19 +4,20 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    UserData = mongoose.model('UserData');
 
 /**
  * Auth callback
  */
-exports.authCallback = function(req, res) {
+exports.authCallback = function (req, res) {
     res.redirect('/');
 };
 
 /**
  * Show login form
  */
-exports.signin = function(req, res) {
+exports.signin = function (req, res) {
     res.render('users/signin', {
         title: 'Signin',
         message: req.flash('error')
@@ -26,7 +27,7 @@ exports.signin = function(req, res) {
 /**
  * Show sign up form
  */
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
     res.render('users/signup', {
         title: 'Sign up',
         user: new User()
@@ -36,7 +37,7 @@ exports.signup = function(req, res) {
 /**
  * Logout
  */
-exports.signout = function(req, res) {
+exports.signout = function (req, res) {
     req.logout();
     res.redirect('/');
 };
@@ -44,18 +45,26 @@ exports.signout = function(req, res) {
 /**
  * Session
  */
-exports.session = function(req, res) {
+exports.session = function (req, res) {
     res.redirect('/');
 };
 
 /**
  * Create user
  */
-exports.create = function(req, res, next) {
+exports.create = function (req, res, next) {
     var user = new User(req.body);
+
+    var userData = new UserData({
+        email: req.body.email,
+        capital: 10,
+        ownedStrock: []
+    })
+
+
     var message = null;
 
-    user.save(function(err) {
+    user.save(function (err) {
         if (err) {
             switch (err.code) {
                 case 11000:
@@ -71,9 +80,27 @@ exports.create = function(req, res, next) {
                 user: user
             });
         }
-        req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/');
+        userData.save(function (err) {
+            if (err) {
+                switch (err.code) {
+                    case 11000:
+                    case 11001:
+                        message = 'Username already exists with ';
+                        break;
+                    default:
+                        message = 'Please fill all the required fields ' + err;
+                }
+
+                return res.render('users/signup', {
+                    message: message,
+                    user: user
+                });
+            }
+
+            req.logIn(user, function (err) {
+                if (err) return next(err);
+                return res.redirect('/');
+            });
         });
     });
 };
@@ -81,18 +108,18 @@ exports.create = function(req, res, next) {
 /**
  * Send User
  */
-exports.me = function(req, res) {
+exports.me = function (req, res) {
     res.jsonp(req.user || null);
 };
 
 /**
  * Find user by id
  */
-exports.user = function(req, res, next, id) {
+exports.user = function (req, res, next, id) {
     User.findOne({
-            _id: id
-        })
-        .exec(function(err, user) {
+        _id: id
+    })
+        .exec(function (err, user) {
             if (err) return next(err);
             if (!user) return next(new Error('Failed to load User ' + id));
             req.profile = user;
