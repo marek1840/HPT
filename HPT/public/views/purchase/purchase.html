@@ -1,50 +1,54 @@
 <section data-ng-controller="PurchaseController">
+    <div class="row">
 
-<div class="row">
+        <section class="col-md-3">
 
+            <div>
+                <label>find</label>
+                <input type="text" ng-model="industryPrefix">
+            </div>
+            <div class="col-md-offset-1 col-md-4">
+                <div ng-repeat="industry in ind()" ng-hide="industry.indexOf(industryPrefix) !== 0"
+                     ng-click="industries[industry] = !industries[industry]">
+                    <input type="checkbox" ng-model="industries[industry]"
+                           ng-change="filterCompanies(industry, val)">
+                    <label>{{industry }} </label>
 
-
-	<section class="col-md-3" >
-
-	<div>
-		<label>find</label>	
-		<input type="text" ng-model="industryPrefix">
-	</div>
-	<div ng-repeat="industry in ind()" ng-show="industry.indexOf(industryPrefix) === 0" >
-	{{industry.indexOf('in')}} -- {{v}}
-		<div class="col-md-2"></div>
-		<input type="checkbox" ng-model="industries[industry]" ng-change="filterCompanies(industry, val)" > <label>{{industry }} </label>
-
-	</div>
-
-	</section>
-
-
-	<section class="col-md-9 companies" >
-
-		<div class="row">
-			<label class="col-md-2">company</label>
-			<label class="col-md-1">difference</label>
-			<label class="col-md-1">stockPrice</label>
-			<label class="col-md-1">amount</label>
-		</div>
-
-		<div class="row" ng-repeat="company in companies() ">
-
-			<div class="col-md-2">{{company.name}}</div>
-			<div class="col-md-1">{{company.difference}}</div>
-			<div class="col-md-1">{{company.stockPrice}}</div>
-
-			<form class="form-horizontal col-md-3" ng-submit="purchase(company.name)(v)">
-					<input class="amount col-md-3" type="number" name="amount" value="0" ng-model="v">
-					<button class="col-md-3 label label-success buy">Buy</button>
-					<div class=" col-md-1 alert alert-success" ng-show="showPurchased(company.name)">
-					Bought: {{purchased(company.name)}}
-			</div>
-			</form>
+                </div>
+            </div>
+        </section>
 
 
-		</div>
-	</section>
-</div>
+        <section class="col-md-9 companies">
+
+            <div class="row">
+                <label class="col-md-2">company</label>
+                <label class="col-md-1">difference</label>
+                <label class="col-md-1">stockPrice</label>
+                <label class="col-md-2">amount</label>
+                <label class="col-md-1">totalPrice</label>
+            </div>
+
+            <div class="row" ng-repeat="company in companies() ">
+
+                <a href=#/company/{{company.name}}>
+                    <div class="col-md-2">{{company.name}}</div>
+                </a>
+
+                <div class="col-md-1">{{company.difference}}</div>
+                <div class="col-md-1">{{company.stockPrice}}</div>
+
+                <form class="form-horizontal col-md-2" ng-submit="purchase(company.name)(amount)(cost)">
+                    <input class="amount" type="number" name="amount" value="0" ng-model="amount">
+                    <button class=" label label-success buy">Buy</button>
+                </form>
+                <div class="col-md-1" ng-show="amount > 0">{{amount * company.stockPrice}}</div>
+                <div class=" col-md-1 alert alert-success" ng-show="showPurchased(company.name)">
+                    Bought: {{purchased(company.name)}}
+                </div>
+
+
+            </div>
+        </section>
+    </div>
 </section>
