@@ -16,7 +16,9 @@ var express = require('express'),
 // Load configurations
 // Set the node environment variable if not set before
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 // Initializing system variables 
 var config = require('./config/config'),
     mongoose = require('mongoose');
@@ -45,6 +47,7 @@ walk(models_path);
 require('./config/passport')(passport);
 
 var app = express();
+
 
 // Express settings
 require('./config/express')(app, passport, db);

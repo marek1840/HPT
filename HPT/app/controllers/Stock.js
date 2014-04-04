@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    UserData = require('./UserData'),
+    //mongoose = require('mongoose'),
+var UserData = require('./UserData'),
     Companies = require('./companies');
 
 exports.purchase = function (req, res) {
@@ -16,7 +16,7 @@ exports.purchase = function (req, res) {
         }
 
         if (userData.capital < req.body.cost) {
-            return res.send('not enough cash: ' + cost)
+            return res.send('not enough cash: ' + req.body.cost);
         }
 
         Companies.buy(
@@ -25,7 +25,7 @@ exports.purchase = function (req, res) {
                 amount: req.body.amount
             }, function (response) {
                 if (response !== 'OK') {
-                    return res.send(406)
+                    return res.send(406);
                 }
                 else {
                     UserData.updateCapital({
@@ -42,18 +42,18 @@ exports.purchase = function (req, res) {
                                     amount: req.body.amount
                                 }, function (err) {
                                     if (err) {
-                                        return res.send('stock update failure', 500)
+                                        return res.send('stock update failure', 500);
                                     } else {
                                         return res.send(200);
                                     }
                                 }
                             );
                         }
-                    })
+                    });
 
                 }
             });
-    })
+    });
 };
 
 exports.sell = function (req, res) {
@@ -63,7 +63,7 @@ exports.sell = function (req, res) {
             amount: req.body.amount
         }, function (response) {
             if (response !== 'OK') {
-                return res.send(406)
+                return res.send(406);
             } else {
                 UserData.updateCapital({
                     email: req.body.email,
@@ -78,14 +78,14 @@ exports.sell = function (req, res) {
                             amount: -req.body.amount
                         }, function (err) {
                             if (err) {
-                                return res.send('stock update failure', 500)
+                                return res.send('stock update failure', 500);
                             } else {
-                                return res.send(200)
+                                return res.send(200);
                             }
-                        })
+                        });
                     }
-                })
+                });
             }
         }
-    )
+    );
 };

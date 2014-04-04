@@ -15,14 +15,14 @@ exports.owned = function (req, res) {
     UserData.findOne({        email: req.params.email}, 'ownedStock -_id', function (err, data) {
         return res.json(data);
     });
-}
+};
 
 exports.updateCapital = function (data, callback) {
     UserData.findAndModify({email: data.email},
         [],
         {$inc: {capital: data.amount}},
-        callback)
-}
+        callback);
+};
 
 exports.updateStock = function (data, callback) {
     UserData.findOne({
