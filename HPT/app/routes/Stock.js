@@ -10,8 +10,6 @@ module.exports = function(app) {
 	//adds purchased stock to user stock
 	app.post('/purchase', Stock.purchase);
 
-    app.post('/sell', function(req, res){
-        return res.json('POST sell');
-    });
+    app.post('/sell', Stock.sell);
 
 }
