@@ -24,6 +24,6 @@ UserDataSchema.statics.capitalOf = function(email){
     return this.findOne({
         email:email
     }).capital;
-}
+};
 
 mongoose.model('UserData', UserDataSchema);

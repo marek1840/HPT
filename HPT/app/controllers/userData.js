@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    UserData = mongoose.model('UserData')
+    UserData = mongoose.model('UserData');
 
 exports.data = function (req, res) {
     UserData.findOne({
@@ -21,22 +21,31 @@ exports.updateCapital = function (data, callback) {
     UserData.findAndModify({email: data.email},
         [],
         {$inc: {capital: data.amount}},
-        function (err) {
-            if (!err) {
-                return callback()
-            }
-        })
+        callback)
 }
 
 exports.updateStock = function (data, callback) {
-    UserData.findAndModify({
-            email: data.email,
-            'ownedStock.company': data.company
-        }, {'ownedStock.$': 1},
-        {$inc: {'ownedStock.amount': data.amount}},
-        function (err) {
-            if (!err) {
-                return callback();
-            }
-        });
-}
+    UserData.findOne({
+        email: data.email
+    }, 'ownedStock -_id', function (err, data) {
+        if (!data.ownedStock[data.company]) {
+            UserData.findAndModify({
+                    email: data.email,
+                    'ownedStock.company': data.company
+                }, {'ownedStock.$': 1},
+                {'ownedStock.amount': data.amount},
+                callback);
+        } else {
+            UserData.findAndModify({
+                    email: data.email,
+                    'ownedStock.company': data.company
+                }, {'ownedStock.$': 1},
+                {$inc: {'ownedStock.amount': data.amount}},
+                callback);
+        }
+    });
+};
+
+exports.findOne = function (where, filter, callback) {
+    return UserData.findOne(where, filter, callback);
+};
