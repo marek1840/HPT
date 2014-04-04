@@ -38,8 +38,11 @@ angular.module('mean.system').controller('PurchaseController',
                             company: companyName,
                             amount: amount,
                             cost: cost
-                        }).success(function (data) {
+                        }).then(function () {
+                            $scope.resp = amount;
                             $scope.purchased[companyName] = amount;
+                        }, function () {
+                            $scope.purchased[companyName] = -30;
                         });
                     }
                 }
@@ -54,7 +57,7 @@ angular.module('mean.system').controller('PurchaseController',
         };
 
         $scope.showPurchased = function (companyName) {
-            return $scope.purchased[companyName] > 0;
+            return $scope.purchased[companyName];
         };
 
     }]);
