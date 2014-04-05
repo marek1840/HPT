@@ -8,8 +8,9 @@
             </div>
             <div class="col-md-offset-1 col-md-12">
                 <div ng-repeat="industry in ind()" ng-hide="industry.indexOf(industryPrefix) !== 0">
-                    <label class="checkbox-inline bold">
-                        <input type="checkbox" ng-model="industries[industry]"> {{industry}}
+                    <label>
+                        <input type="checkbox" ng-model="industries[industry]" 
+                         ng-change="filterCompanies(industry, val)"> {{industry}}
                     </label>
                 </div>
             </div>
