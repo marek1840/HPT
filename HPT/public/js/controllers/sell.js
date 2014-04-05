@@ -9,6 +9,13 @@ angular.module('mean.system').controller('SellController',
         var current_user = $scope.global.user.email;
         $http.get('/users/'+current_user+'/stock').success(function (ownedStock) { 
             $http.get('/companies.json').success(function (companies) {
+                var ownedStockDict = {}
+                ownedStock.ownedStock.forEach(function(entry){
+                    ownedStockDict[entry.company] = entry.amount;
+                });
+                ownedStock = ownedStockDict;
+                console.log(ownedStock);
+
                 $scope.industries = companies.reduce(function (acc, company) {
                     if (company.name in ownedStock)
                         acc[company.industry] = true;
