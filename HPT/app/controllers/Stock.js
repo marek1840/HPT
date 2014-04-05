@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    UserData = require('./UserData'),
+//mongoose = require('mongoose'),
+var UserData = require('./UserData'),
     Companies = require('./companies');
 
 exports.purchase = function (req, res) {
@@ -16,7 +16,7 @@ exports.purchase = function (req, res) {
         }
 
         if (userData.capital < req.body.cost) {
-            return res.send('not enough cash: ' + cost)
+            return res.send('not enough cash: ' + req.body.cost);
         }
 
         Companies.buy(
@@ -25,33 +25,32 @@ exports.purchase = function (req, res) {
                 amount: req.body.amount
             }, function (response) {
                 if (response !== 'OK') {
-                    return res.send(406)
+                    return res.send(406);
                 }
 
                 UserData.updateCapital({
                     email: req.body.email,
                     amount: -req.body.cost
-                }, function (err, dataCap) {
+                }, function (err) {
                     if (err) {
                         return res.send('capital update failure: ' + err, 500);
                     }
 
-                    UserData.updateStock(
-                        {
+                    UserData.updateStock({
                             email: req.body.email,
                             company: req.body.company,
                             amount: req.body.amount
-                        }, function (err, dataSto) {
+                        }, function (err) {
                             if (err) {
                                 return res.send('stock update failure: ' + err, 500)
                             }
 
-                            return res.json(dataSto, 200);
+                            return res.json(200);
                         }
                     );
                 })
             });
-    })
+    });
 };
 
 exports.sell = function (req, res) {
@@ -80,10 +79,10 @@ exports.sell = function (req, res) {
                     if (err) {
                         return res.send('stock update failure: ' + err, 500)
                     }
-                    
+
                     return res.send(200)
                 })
             })
         }
-    )
+    );
 };

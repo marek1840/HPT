@@ -5,7 +5,7 @@ var dummyCompanies = [
     {
         name: 'c1',
         industry: 'military',
-        change: -100,
+        change: 100,
         stockPrice: 150
     },
     {

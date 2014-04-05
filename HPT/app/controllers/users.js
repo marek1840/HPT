@@ -59,7 +59,7 @@ exports.create = function (req, res, next) {
         email: req.body.email,
         capital: 1000000,
         ownedStrock: []
-    })
+    });
 
 
     var message = null;
