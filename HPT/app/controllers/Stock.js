@@ -27,31 +27,29 @@ exports.purchase = function (req, res) {
                 if (response !== 'OK') {
                     return res.send(406)
                 }
-                else {
-                    UserData.updateCapital({
-                        email: req.body.email,
-                        amount: -req.body.cost
-                    }, function (err) {
-                        if (err) {
-                            return res.send('capital update failure', 500);
-                        } else {
-                            UserData.updateStock(
-                                {
-                                    email: req.body.email,
-                                    company: req.body.company,
-                                    amount: req.body.amount
-                                }, function (err) {
-                                    if (err) {
-                                        return res.send('stock update failure', 500)
-                                    } else {
-                                        return res.send(200);
-                                    }
-                                }
-                            );
-                        }
-                    })
 
-                }
+                UserData.updateCapital({
+                    email: req.body.email,
+                    amount: -req.body.cost
+                }, function (err, dataCap) {
+                    if (err) {
+                        return res.send('capital update failure: ' + err, 500);
+                    }
+
+                    UserData.updateStock(
+                        {
+                            email: req.body.email,
+                            company: req.body.company,
+                            amount: req.body.amount
+                        }, function (err, dataSto) {
+                            if (err) {
+                                return res.send('stock update failure: ' + err, 500)
+                            }
+
+                            return res.json(dataSto, 200);
+                        }
+                    );
+                })
             });
     })
 };
@@ -64,28 +62,28 @@ exports.sell = function (req, res) {
         }, function (response) {
             if (response !== 'OK') {
                 return res.send(406)
-            } else {
-                UserData.updateCapital({
+            }
+
+            UserData.updateCapital({
+                email: req.body.email,
+                amount: req.body.income
+            }, function (err) {
+                if (err) {
+                    return res.send('capital update failure: ' + err, 500);
+                }
+
+                UserData.updateStock({
                     email: req.body.email,
-                    amount: req.body.income
+                    company: req.body.company,
+                    amount: -req.body.amount
                 }, function (err) {
                     if (err) {
-                        return res.send('capital update failure', 500);
-                    } else {
-                        UserData.updateStock({
-                            email: req.body.email,
-                            company: req.body.company,
-                            amount: -req.body.amount
-                        }, function (err) {
-                            if (err) {
-                                return res.send('stock update failure', 500)
-                            } else {
-                                return res.send(200)
-                            }
-                        })
+                        return res.send('stock update failure: ' + err, 500)
                     }
+                    
+                    return res.send(200)
                 })
-            }
+            })
         }
     )
 };
