@@ -42,13 +42,13 @@ exports.purchase = function (req, res) {
                             amount: req.body.amount
                         }, function (err) {
                             if (err) {
-                                return res.send('stock update failure: ' + err, 500)
+                                return res.send('stock update failure: ' + err, 500);
                             }
 
                             return res.json(200);
                         }
                     );
-                })
+                });
             });
     });
 };
@@ -60,7 +60,7 @@ exports.sell = function (req, res) {
             amount: req.body.amount
         }, function (response) {
             if (response !== 'OK') {
-                return res.send(406)
+                return res.send(406);
             }
 
             UserData.updateCapital({
@@ -77,12 +77,12 @@ exports.sell = function (req, res) {
                     amount: -req.body.amount
                 }, function (err) {
                     if (err) {
-                        return res.send('stock update failure: ' + err, 500)
+                        return res.send('stock update failure: ' + err, 500);
                     }
 
-                    return res.send(200)
-                })
-            })
+                    return res.send(200);
+                });
+            });
         }
     );
 };
