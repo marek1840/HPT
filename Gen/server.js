@@ -30,7 +30,8 @@ var server = net.createServer(function(c) {
             c.write(('OK'));
         } else if(received.type === "sell") {
             //sells here
-            c.write(JSON.stringify({"GOTIT": "sell"}));
+            //c.write(JSON.stringify({"GOTIT": "sell"}));
+            c.write(('OK'));
         }
     });
     c.on('end', function() {});
