@@ -12,37 +12,53 @@ exports.data = function (req, res) {
 };
 
 exports.owned = function (req, res) {
-    UserData.findOne({        email: req.params.email}, 'ownedStock -_id', function (err, data) {
+    UserData.findOne({email: req.params.email}, 'ownedStock -_id', function (err, data) {
         return res.json(data);
     });
 };
 
-exports.updateCapital = function (data, callback) {
-    UserData.findAndModify({email: data.email},
+exports.updateCapital = function (updateData, callback) {
+    UserData.findAndModify({email: updateData.email},
         [],
-        {$inc: {capital: data.amount}},
+        {$inc: {capital: updateData.amount}},
         callback);
 };
 
-exports.updateStock = function (data, callback) {
+
+exports.updateStock = function (stockData, callback) {
     UserData.findOne({
-        email: data.email
-    }, 'ownedStock -_id', function (err, data) {
-        if (!data.ownedStock[data.company]) {
-            UserData.findAndModify({
-                    email: data.email,
-                    'ownedStock.company': data.company
-                }, {'ownedStock.$': 1},
-                {'ownedStock.amount': data.amount},
-                callback);
-        } else {
-            UserData.findAndModify({
-                    email: data.email,
-                    'ownedStock.company': data.company
-                }, {'ownedStock.$': 1},
-                {$inc: {'ownedStock.amount': data.amount}},
-                callback);
+        email: stockData.email
+    }, {}, function (err, userData) {
+        if (err) {
+            return callback(err);
         }
+
+        var index = -1;
+        for (var i = 0; i < userData.ownedStock.length && index < 0; ++i) {
+            if (userData.ownedStock[i].company === stockData.company) {
+                index = i;
+            }
+        }
+
+        userData.ownedStock.filter(function (stock) {
+            return stock.company === stockData.company;
+        });
+
+        if (index < 0) {
+            var stock = {
+                company: stockData.company,
+                amount: stockData.amount
+            };
+
+            userData.ownedStock.push(stock);
+        } else {
+            var amount = userData.ownedStock[index].amount;
+            userData.ownedStock[index].amount = amount + stockData.amount;
+        }
+
+        return userData.save(function (err) {
+            return callback(err);
+        });
     });
 };
 

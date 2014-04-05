@@ -1,0 +1,56 @@
+<section data-ng-controller="SellController">
+    <div class="row">
+
+        <section class="col-md-3">
+            <div>
+                <label>find</label>
+                <input type="text" ng-model="industryPrefix">
+            </div>
+            <div class="col-md-offset-1 col-md-12">
+                <div ng-repeat="industry in ind()" ng-hide="industry.indexOf(industryPrefix) !== 0">
+                    <label>
+                        <input type="checkbox" ng-model="industries[industry]"
+                               ng-change="filterCompanies(industry, val)"> {{industry}}
+                    </label>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="col-md-9 companies">
+
+            <div class="row">
+                <label class="col-md-2">company</label>
+                <!--<label class="col-md-1">change</label>-->
+                <label class="col-md-1">stockPrice</label>
+                <label class="col-md-1">owned</label>
+                <label class="col-md-2">amount</label>
+                <label class="col-md-1">totalIncome</label>
+            </div>
+
+            <div class="row" ng-repeat="company in companies() ">
+
+                <a href=#/company/{{company.name}}>
+                    <div class="col-md-2">{{company.name}}</div>
+                </a>
+
+                <!--<div class="col-md-1 alert-danger" ng-show="company.change < 0">{{company.change}}</div>-->
+                <!--<div class="col-md-1 alert-success" ng-hide="company.change < 0">{{company.change}}</div>-->
+
+                <div class="col-md-1">{{company.stockPrice}}</div>
+                <div class="col-md-1">{{company.ownedStock}}</div>
+
+                <form class="form-horizontal col-md-2" ng-submit="sell(ownedCompanies.indexOf(company))(amount)(amount * company.stockPrice)">
+                    <input class="amount" type="number" name="amount" value="0" ng-model="amount">
+                    <button class=" label label-success sell">Sell</button>
+                </form>
+                <div class="col-md-2" ng-show="amount > 0">{{amount * company.stockPrice}}</div>
+                <div class=" col-md-1 alert alert-success" ng-show="showSold(company.name)">
+                    Sold: {{sold(company.name)}}
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+</section>
