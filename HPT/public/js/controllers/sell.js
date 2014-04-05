@@ -7,7 +7,7 @@ angular.module('mean.system').controller('SellController',
         $scope.industryPrefix = '';
 
         var current_user = $scope.global.user.email;
-        $http.get('/users/' + current_user + '/stock').success(function (ownedStock) {
+        $http.get('/users/'+current_user+'/stock').success(function (ownedStock) {
             $http.get('/companies.json').success(function (companies) {
                 $scope.industries = companies.reduce(function (acc, company) {
                     if (company.name in ownedStock)
@@ -23,7 +23,7 @@ angular.module('mean.system').controller('SellController',
                 };
 
                 $scope.ownedCompanies = companies.filter(function (company) {
-                    company.ownedStock = ownedStock[company.name];
+                    company.ownedStock = ownedStock[company.name]
                     return ownedStock[company.name] > 0;
                 });
 
@@ -49,10 +49,10 @@ angular.module('mean.system').controller('SellController',
                             company: companyName,
                             amount: amount,
                             cost: cost
-                        }).success(function () {
+                        }).success(function (data) {
                             $scope.sold[companyName] = amount;
                         });
-                    };
+                    }
                 }
             };
         };

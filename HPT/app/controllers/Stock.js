@@ -65,7 +65,7 @@ exports.sell = function (req, res) {
 
             UserData.updateCapital({
                 email: req.body.email,
-                amount: req.body.income
+                amount: req.body.cost
             }, function (err) {
                 if (err) {
                     return res.send('capital update failure: ' + err, 500);
