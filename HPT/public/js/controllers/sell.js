@@ -9,6 +9,12 @@ angular.module('mean.system').controller('SellController',
         var current_user = $scope.global.user.email;
         $http.get('/users/'+current_user+'/stock').success(function (ownedStock) {
             $http.get('/companies.json').success(function (companies) {
+                var ownedStockDict = {}
+                ownedStock.ownedStock.forEach(function(entry){
+                    ownedStockDict[entry.company] = entry.amount;
+                });
+                ownedStock = ownedStockDict;
+
                 $scope.industries = companies.reduce(function (acc, company) {
                     if (company.name in ownedStock)
                         acc[company.industry] = true;
@@ -43,14 +49,17 @@ angular.module('mean.system').controller('SellController',
             var ownedStock = $scope.ownedCompanies[companyIndex].ownedStock;
             return function (amount) {
                 if (amount > 0 && amount <= ownedStock) {
-                    return function (cost) {
+                    return function (income) {
                         $http.post('/sell', {
                             email: Global.user.email,
                             company: companyName,
                             amount: amount,
-                            cost: cost
-                        }).success(function (data) {
+                            income: income
+                        }).then(function () {
+                            $scope.resp = amount;
                             $scope.sold[companyName] = amount;
+                        }, function(){
+                            $scope.sold[companyName] = -30;
                         });
                     }
                 }

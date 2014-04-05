@@ -22,9 +22,7 @@ var server = net.createServer(function (c) {
         if (received.type === "getAll") {
             Company.getAll(sendData);
         } else if (received.type === "buy") {
-            console.log("entering buy");
             Company.buy(received, sendData);
-            console.log("leaving buy");
         } else if (received.type === "sell") {
             Company.sell(received, sendData);
         }
