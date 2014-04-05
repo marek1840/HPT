@@ -49,7 +49,7 @@ exports.updateStock = function (stockData, callback) {
                 company: stockData.company,
                 amount: stockData.amount
             };
-            
+
             userData.ownedStock.push(stock);
         } else {
             var amount = userData.ownedStock[index].amount;

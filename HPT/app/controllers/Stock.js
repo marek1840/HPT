@@ -25,7 +25,7 @@ exports.purchase = function (req, res) {
                 amount: req.body.amount
             }, function (response) {
                 if (response !== 'OK') {
-                    return res.send(406);
+                    return res.send(response + ' eq= ' + (response === 'OK') + ' len ' + (response.length), 406);
                 }
 
                 UserData.updateCapital({
@@ -60,7 +60,7 @@ exports.sell = function (req, res) {
             amount: req.body.amount
         }, function (response) {
             if (response !== 'OK') {
-                return res.send(406);
+                return res.send(response + ' eq= ' + (response === 'OK'), 406);
             }
 
             UserData.updateCapital({

@@ -22,10 +22,4 @@ UserDataSchema.statics.findAndModify = function (query, sort, doc, options, call
     return this.collection.findAndModify(query, sort, doc, options, callback);
 };
 
-UserDataSchema.statics.capitalOf = function (email) {
-    return this.findOne({
-        email: email
-    }).capital;
-};
-
 mongoose.model('UserData', UserDataSchema);
