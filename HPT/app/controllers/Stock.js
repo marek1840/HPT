@@ -12,11 +12,11 @@ exports.purchase = function (req, res) {
     }, 'capital -_id', function (err, userData) {
 
         if (err) {
-            return res.send('too few gold', 406);
+            return res.send('capital checking', 406);
         }
 
         if (userData.capital < req.body.cost) {
-            return res.send('not enough cash: ' + req.body.cost);
+            return res.send('not enough cash: ' + req.body.cost, 406);
         }
 
         Companies.buy(
@@ -25,7 +25,7 @@ exports.purchase = function (req, res) {
                 amount: req.body.amount
             }, function (response) {
                 if (response !== 'OK') {
-                    return res.send(response + ' eq= ' + (response === 'OK') + ' len ' + (response.length), 406);
+                    return res.send(response, 406);
                 }
 
                 UserData.updateCapital({
@@ -60,7 +60,7 @@ exports.sell = function (req, res) {
             amount: req.body.amount
         }, function (response) {
             if (response !== 'OK') {
-                return res.send(response + ' eq= ' + (response === 'OK'), 406);
+                return res.send(response + ' eq= ' + (response !== 'OK') + ' len ' + (response.length), 406);
             }
 
             UserData.updateCapital({

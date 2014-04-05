@@ -9,7 +9,7 @@ angular.module('mean.system').controller('SellController',
         var current_user = $scope.global.user.email;
         $http.get('/users/'+current_user+'/stock').success(function (ownedStock) {
             $http.get('/companies.json').success(function (companies) {
-                var ownedStockDict = {}
+                var ownedStockDict = {};
                 ownedStock.ownedStock.forEach(function(entry){
                     ownedStockDict[entry.company] = entry.amount;
                 });
@@ -29,7 +29,7 @@ angular.module('mean.system').controller('SellController',
                 };
 
                 $scope.ownedCompanies = companies.filter(function (company) {
-                    company.ownedStock = ownedStock[company.name]
+                    company.ownedStock = ownedStock[company.name];
                     return ownedStock[company.name] > 0;
                 });
 
@@ -54,14 +54,14 @@ angular.module('mean.system').controller('SellController',
                             email: Global.user.email,
                             company: companyName,
                             amount: amount,
-                            income: income
+                            cost: income
                         }).then(function () {
                             $scope.resp = amount;
                             $scope.sold[companyName] = amount;
                         }, function(){
                             $scope.sold[companyName] = -30;
                         });
-                    }
+                    };
                 }
             };
         };

@@ -40,9 +40,10 @@ exports.sell = function (buyData, callback) {
         {$inc: {stockAmount: buyData.amount}},
         function (err) {
             if (err) {
+                console.log("REJECT based on " + err);
                 return callback('REJECT');
             }
-
+            console.log('sending OK')
             return callback('OK');
         });
 };

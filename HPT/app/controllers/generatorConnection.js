@@ -38,7 +38,7 @@ exports.sell = function (toSell, callback) {
     });
 
     client.on('data', function (data) {
-        callback(data);
+        callback(data.toString());
         client.end();
     });
 
