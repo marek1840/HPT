@@ -1,7 +1,7 @@
 'use strict';
 
 // User routes use users controller
-var companies = require('../controllers/companies');
+//var companies = require('../controllers/companies');
 var Stock = require('../controllers/Stock');
 
 
@@ -12,4 +12,4 @@ module.exports = function(app) {
 
     app.post('/sell', Stock.sell);
 
-}
+};

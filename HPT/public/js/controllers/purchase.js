@@ -4,8 +4,8 @@ angular.module('mean.system').controller('PurchaseController',
     ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
         $scope.global = Global;
 
-        var res = $http.get('/companies.json')
-        $scope.industryPrefix = ''
+        var res = $http.get('/companies.json');
+        $scope.industryPrefix = '';
 
         res.success(function (data) {
             $scope.industries = data.reduce(function (acc, company) {
@@ -44,7 +44,7 @@ angular.module('mean.system').controller('PurchaseController',
                         }, function () {
                             $scope.purchased[companyName] = -30;
                         });
-                    }
+                    };
                 }
             };
         };

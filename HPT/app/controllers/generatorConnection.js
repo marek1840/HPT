@@ -4,7 +4,7 @@ var net = require('net');
 
 exports.getAllCompanies = function (callback) {
     var client = net.connect({port: 8000}, function () {
-        client.write(JSON.stringify({"type": "getAll"}));
+        client.write(JSON.stringify({'type': 'getAll'}));
     });
 
     client.on('data', function (data) {
@@ -18,7 +18,7 @@ exports.getAllCompanies = function (callback) {
 
 exports.buy = function (toBuy, callback) {
     var client = net.connect({port: 8000}, function () {
-        toBuy.type = "buy";
+        toBuy.type = 'buy';
         client.write(JSON.stringify(toBuy));
     });
 
@@ -33,7 +33,7 @@ exports.buy = function (toBuy, callback) {
 
 exports.sell = function (toSell, callback) {
     var client = net.connect({port: 8000}, function () {
-        toSell.type = "sell";
+        toSell.type = 'sell';
         client.write(JSON.stringify(toSell));
     });
 
