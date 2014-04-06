@@ -2,7 +2,8 @@
 require('./model/Companies.js');
 
 var net = require('net'),
-    Company = require('./controllers/Company.js');
+    Company = require('./controllers/Company.js'),
+	Simulate = require('./simulation/simulation.js');
 
 
 var server = net.createServer(function (c) {
@@ -31,8 +32,8 @@ var server = net.createServer(function (c) {
     });
 });
 
+setInterval(Simulate.simulation, 120000);
+
 server.listen(8000, function () {
     console.log('server bound');
 });
-
-
