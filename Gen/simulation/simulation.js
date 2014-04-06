@@ -7,7 +7,7 @@ function random (low, high) {
 }
 
 function generateNewStockPrice(stockPrice) {
-  return Math.floor(stockPrice * random(0.75, 1.3));
+  return Math.floor(stockPrice * random(0.95, 1.05));
 }
 
 exports.simulation = function() {
