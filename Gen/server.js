@@ -1,9 +1,9 @@
 'use strict';
 require('./model/Companies.js');
 
-var net = require('net'),
-    Company = require('./controllers/Company.js'),
-	Simulate = require('./simulation/simulation.js');
+var net = require('net');
+var Company = require('./controllers/Company.js');
+var Simulate = require('./simulation/simulation.js');
 
 
 var server = net.createServer(function (c) {

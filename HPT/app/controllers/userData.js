@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    UserData = mongoose.model('UserData');
+var mongoose = require('mongoose');
+var UserData = mongoose.model('UserData');
 
 exports.data = function (req, res) {
     UserData.findOne({

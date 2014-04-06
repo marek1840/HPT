@@ -1,6 +1,6 @@
 'use strict';
-var mongoose = require('mongoose'),
-    Company = mongoose.model('Company');
+var mongoose = require('mongoose');
+var Company = mongoose.model('Company');
 
 exports.getAll = function (callback) {
     Company.getAll(function (err, data) {

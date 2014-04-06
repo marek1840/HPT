@@ -1,11 +1,10 @@
 'use strict';
 
 //mongoose = require('mongoose'),
-var UserData = require('./UserData'),
-    Companies = require('./companies');
+var UserData = require('./UserData');
+var Companies = require('./companies');
 
 exports.purchase = function (req, res) {
-
 
     UserData.findOne({
         email: req.body.email

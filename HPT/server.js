@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    fs = require('fs'),
-    passport = require('passport'),
-    logger = require('mean-logger');
+var express = require('express');
+var fs = require('fs');
+var passport = require('passport');
+var logger = require('mean-logger');
 
 /**
  * Main application entry file.
