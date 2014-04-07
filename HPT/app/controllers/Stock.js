@@ -1,7 +1,7 @@
 'use strict';
 
 //mongoose = require('mongoose'),
-var UserData = require('./UserData'),
+var UserData = require('./userData'),
     Companies = require('./companies');
 
 exports.purchase = function (req, res) {
