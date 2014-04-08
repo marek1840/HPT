@@ -5,6 +5,7 @@ angular.module('mean.system').controller('SellController',
         $scope.global = Global;
 
         $scope.industryPrefix = '';
+        $scope.companyPrefix = '';
 
         var current_user = $scope.global.user.email;
         $http.get('/users/'+current_user+'/stock').success(function (ownedStock) {

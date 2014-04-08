@@ -6,6 +6,7 @@ angular.module('mean.system').controller('PurchaseController',
 
         var res = $http.get('/companies.json');
         $scope.industryPrefix = '';
+        $scope.companyPrefix = '';
 
         res.success(function (data) {
             $scope.industries = data.reduce(function (acc, company) {
