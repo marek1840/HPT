@@ -20,6 +20,8 @@ angular.module('mean.system').controller('PurchaseController',
                 return keys;
             };
 
+            $scope.allCompanies = data;
+
             $scope.companies = function () {
                 return data.filter(function (company) {
                     return $scope.industries[company.industry];
@@ -59,5 +61,20 @@ angular.module('mean.system').controller('PurchaseController',
         $scope.showPurchased = function (companyName) {
             return $scope.purchased[companyName];
         };
+
+        $scope.updateStockPrice = function (){
+            $http.get('/companies.json').success(function (data){
+                var companiesDict = {};
+                data.forEach(function(entry){
+                    companiesDict[entry.name] = entry;
+                });
+                $scope.allCompanies.forEach(function(entry){
+                    entry.stockPrice = companiesDict[entry.name].stockPrice;
+                });
+                $scope.$apply();
+            });
+        }
+
+        setInterval($scope.updateStockPrice, 10000);
 
     }]);
