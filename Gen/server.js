@@ -2,8 +2,8 @@
 require('./model/Companies.js');
 
 var net = require('net');
-var Company = require('./controllers/Company.js');
-var Simulate = require('./simulation/simulation.js');
+var company = require('./controllers/Company.js');
+var simulate = require('./simulation/simulation.js');
 
 
 var server = net.createServer(function (c) {
@@ -20,19 +20,19 @@ var server = net.createServer(function (c) {
 
         console.log('got ' + JSON.stringify(received))
 
-        if (received.type === "getAll") {
-            Company.getAll(sendData);
-        } else if (received.type === "buy") {
-            Company.buy(received, sendData);
-        } else if (received.type === "sell") {
-            Company.sell(received, sendData);
+        if (received.type === 'getAll') {
+            company.getAll(sendData);
+        } else if (received.type === 'buy') {
+            company.buy(received, sendData);
+        } else if (received.type === 'sell') {
+            company.sell(received, sendData);
         }
     });
     c.on('end', function () {
     });
 });
 
-setInterval(Simulate.simulation, 10000);
+setInterval(simulate.simulation, 10000);
 
 server.listen(8000, function () {
     console.log('server bound');

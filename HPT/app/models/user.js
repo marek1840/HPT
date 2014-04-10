@@ -22,12 +22,13 @@ var UserSchema = new Schema({
 /**
  * Virtuals
  */
-UserSchema.virtual('password').set(function(password) {
-    this._password = password;
-    this.salt = this.makeSalt();
-    this.hashed_password = this.encryptPassword(password);
-}).get(function() {
-    return this._password;
+UserSchema.virtual('password').set(
+	function(password) {
+		this._password = password;
+		this.salt = this.makeSalt();
+		this.hashed_password = this.encryptPassword(password);
+	}).get(function() {
+		return this._password;
 });
 
 /**
@@ -58,7 +59,8 @@ UserSchema.path('email').validate(function(email) {
 
 UserSchema.path('hashed_password').validate(function(hashed_password) {
     // If you are authenticating by any of the oauth strategies, don't validate.
-    if (!this.provider) return true;
+    if (!this.provider)
+		return true;
     return (typeof hashed_password === 'string' && hashed_password.length > 0);
 }, 'Password cannot be blank');
 

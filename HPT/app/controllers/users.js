@@ -54,15 +54,13 @@ exports.session = function (req, res) {
  */
 exports.create = function (req, res, next) {
     var user = new User(req.body);
+	var message = null;
 
     var userData = new UserData({
         email: req.body.email,
         capital: 1000000,
         ownedStrock: []
     });
-
-
-    var message = null;
 
     user.save(function (err) {
         if (err) {

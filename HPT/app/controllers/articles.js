@@ -3,9 +3,9 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    Article = mongoose.model('Article'),
-    _ = require('lodash');
+var mongoose = require('mongoose');
+var Article = mongoose.model('Article');
+var _ = require('lodash');
 
 
 /**
@@ -88,13 +88,14 @@ exports.show = function(req, res) {
  * List of Articles
  */
 exports.all = function(req, res) {
-    Article.find().sort('-created').populate('user', 'name username').exec(function(err, articles) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp(articles);
-        }
-    });
+    Article.find().sort('-created').populate('user', 'name username').exec(
+		function(err, articles) {
+			if (err) {
+				res.render('error', {
+					status: 500
+				});
+			} else {
+				res.jsonp(articles);
+			}
+		});
 };

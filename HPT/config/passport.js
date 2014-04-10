@@ -1,14 +1,14 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    LocalStrategy = require('passport-local').Strategy,
-    TwitterStrategy = require('passport-twitter').Strategy,
-    FacebookStrategy = require('passport-facebook').Strategy,
-    GitHubStrategy = require('passport-github').Strategy,
-    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-    LinkedinStrategy = require('passport-linkedin').Strategy,
-    User = mongoose.model('User'),
-    config = require('./config');
+var mongoose = require('mongoose');
+var localStrategy = require('passport-local').Strategy;
+var twitterStrategy = require('passport-twitter').Strategy;
+var facebookStrategy = require('passport-facebook').Strategy;
+var gitHubStrategy = require('passport-github').Strategy;
+var googleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var linkedinStrategy = require('passport-linkedin').Strategy;
+var User = mongoose.model('User');
+var config = require('./config');
 
 module.exports = function(passport) {
 
@@ -28,7 +28,7 @@ module.exports = function(passport) {
     });
 
     // Use local strategy
-    passport.use(new LocalStrategy({
+    passport.use(new localStrategy({
             usernameField: 'email',
             passwordField: 'password'
         },
@@ -55,7 +55,7 @@ module.exports = function(passport) {
     ));
 
     // Use twitter strategy
-    passport.use(new TwitterStrategy({
+    passport.use(new twitterStrategy({
             consumerKey: config.twitter.clientID,
             consumerSecret: config.twitter.clientSecret,
             callbackURL: config.twitter.callbackURL
@@ -86,7 +86,7 @@ module.exports = function(passport) {
     ));
 
     // Use facebook strategy
-    passport.use(new FacebookStrategy({
+    passport.use(new facebookStrategy({
             clientID: config.facebook.clientID,
             clientSecret: config.facebook.clientSecret,
             callbackURL: config.facebook.callbackURL
@@ -118,7 +118,7 @@ module.exports = function(passport) {
     ));
 
     // Use github strategy
-    passport.use(new GitHubStrategy({
+    passport.use(new gitHubStrategy({
             clientID: config.github.clientID,
             clientSecret: config.github.clientSecret,
             callbackURL: config.github.callbackURL
@@ -147,7 +147,7 @@ module.exports = function(passport) {
     ));
 
     // Use google strategy
-    passport.use(new GoogleStrategy({
+    passport.use(new googleStrategy({
             clientID: config.google.clientID,
             clientSecret: config.google.clientSecret,
             callbackURL: config.google.callbackURL
@@ -176,7 +176,7 @@ module.exports = function(passport) {
     ));
 
     // use linkedin strategy
-    passport.use(new LinkedinStrategy({
+    passport.use(new linkedinStrategy({
             consumerKey: config.linkedin.clientID,
             consumerSecret: config.linkedin.clientSecret,
             callbackURL: config.linkedin.callbackURL,
