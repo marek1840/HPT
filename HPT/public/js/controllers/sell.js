@@ -89,9 +89,8 @@ angular.module('mean.system').controller('SellController',
                 $scope.allCompanies.forEach(function(company){
                     company.ownedStock = ownedStockDict[company.name]
                 });
-                $scope.$apply();
             });
-        }
+        };
 
         $scope.updateStockPrice = function (){
             $http.get('/companies.json').success(function (data){
@@ -102,9 +101,8 @@ angular.module('mean.system').controller('SellController',
                 $scope.allCompanies.forEach(function(entry){
                     entry.stockPrice = companiesDict[entry.name].stockPrice;
                 });
-                $scope.$apply();
             });
-        }
+        };
 
         setInterval($scope.updateStockPrice,10000);
     }]);

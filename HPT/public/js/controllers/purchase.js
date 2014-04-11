@@ -71,9 +71,8 @@ angular.module('mean.system').controller('PurchaseController',
                 $scope.allCompanies.forEach(function(entry){
                     entry.stockPrice = companiesDict[entry.name].stockPrice;
                 });
-                $scope.$apply();
             });
-        }
+        };
 
         setInterval($scope.updateStockPrice, 10000);
 
