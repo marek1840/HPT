@@ -59,6 +59,7 @@ exports.create = function (req, res, next) {
     var userData = new UserData({
         email: req.body.email,
         capital: 1000000,
+        brokers: [],
         ownedStrock: []
     });
 

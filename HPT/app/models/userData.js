@@ -5,7 +5,15 @@ var Schema = mongoose.Schema;
 
 var stockSchema = new Schema({
     company: String,
-    amount: Number
+    amount: Number,
+    averagePrice: Number
+});
+
+var brokerSchema = new Schema({
+    name: String,
+    funds: Number,
+    hiredAmount: Number,
+    releaseDate: Date
 });
 
 var UserDataSchema = new Schema({
@@ -15,6 +23,7 @@ var UserDataSchema = new Schema({
         required: true
     },
     capital: Number,
+    brokers: [brokerSchema],
     ownedStock: [stockSchema]
 });
 

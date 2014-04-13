@@ -12,10 +12,17 @@ exports.data = function (req, res) {
 };
 
 exports.owned = function (req, res) {
-    UserData.findOne({email: req.params.email}, 'ownedStock -_id', 
-		function (err, data) {
-			return res.json(data);
-		});
+    UserData.findOne({email: req.params.email}, 'ownedStock -_id',
+        function (err, data) {
+            return res.json(data);
+        });
+};
+
+exports.brokers = function (req, res) {
+    UserData.findOne({email: req.params.email}, 'brokers -_id',
+        function (err, data) {
+            return res.json(data);
+        });
 };
 
 exports.updateCapital = function (updateData, callback) {
@@ -34,6 +41,7 @@ exports.updateStock = function (stockData, callback) {
             return callback(err);
         }
 
+        //finding index of company
         var index = -1;
         for (var i = 0; i < userData.ownedStock.length && index < 0; ++i) {
             if (userData.ownedStock[i].company === stockData.company) {
@@ -45,24 +53,33 @@ exports.updateStock = function (stockData, callback) {
             return stock.company === stockData.company;
         });
 
+        //if there is no entry - create one
         if (index < 0) {
-            var stock = {
+            var newStock = {
                 company: stockData.company,
-                amount: stockData.amount
+                amount: stockData.amount,
+                averagePrice: stockData.averagePrice
             };
 
-            userData.ownedStock.push(stock);
+            userData.ownedStock.push(newStock);
         } else {
+            //updates amount
             var amount = userData.ownedStock[index].amount + stockData.amount;
+
             if (amount === 0) {
                 //removing entry
-                var v = userData.ownedStock.splice(index, 1)
+                userData.ownedStock.splice(index, 1)
             } else {
                 //updating entry
                 userData.ownedStock[index].amount = amount;
             }
 
-
+            if (stockData.amount > 0) {
+                //if buying - update average price
+                var averagePrice = (userData.ownedStock[index].amount * userData.ownedStock[index].averagePrice +
+                    stockData.amount * stockData.averagePrice) / amount;
+                userData.ownedStock[index].averagePrice = averagePrice;
+            }
         }
 
         return userData.save(function (err) {
