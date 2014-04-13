@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    UserData = mongoose.model('UserData');
+var mongoose = require('mongoose');
+var UserData = mongoose.model('UserData');
 
 exports.data = function (req, res) {
     UserData.findOne({
@@ -12,9 +12,10 @@ exports.data = function (req, res) {
 };
 
 exports.owned = function (req, res) {
-    UserData.findOne({email: req.params.email}, 'ownedStock -_id', function (err, data) {
-        return res.json(data);
-    });
+    UserData.findOne({email: req.params.email}, 'ownedStock -_id', 
+		function (err, data) {
+			return res.json(data);
+		});
 };
 
 exports.updateCapital = function (updateData, callback) {

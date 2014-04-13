@@ -1,16 +1,13 @@
 'use strict';
 
 //mongoose = require('mongoose'),
-var UserData = require('./UserData'),
-    Companies = require('./companies');
+var UserData = require('./UserData');
+var Companies = require('./companies');
 
 exports.purchase = function (req, res) {
-
-
     UserData.findOne({
         email: req.body.email
     }, 'capital -_id', function (err, userData) {
-
         if (err) {
             return res.send('capital checking', 406);
         }
@@ -42,14 +39,15 @@ exports.purchase = function (req, res) {
                             amount: req.body.amount
                         }, function (err) {
                             if (err) {
-                                return res.send('stock update failure: ' + err, 500);
+                                return res.send(
+									'stock update failure: ' + err, 500);
                             }
-
                             return res.json(200);
                         }
                     );
                 });
-            });
+            }
+		);
     });
 };
 
@@ -60,7 +58,9 @@ exports.sell = function (req, res) {
             amount: req.body.amount
         }, function (response) {
             if (response !== 'OK') {
-                return res.send(response + ' eq= ' + (response !== 'OK') + ' len ' + (response.length), 406);
+                return res.send(
+					response + ' eq= ' + (response !== 'OK') + 
+					' len ' + (response.length), 406);
             }
 
             UserData.updateCapital({

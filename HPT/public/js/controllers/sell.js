@@ -78,4 +78,5 @@ angular.module('mean.system').controller('SellController',
             return $scope.sold[companyName] > 0;
         };
 
-    }]);
+    }]
+);
