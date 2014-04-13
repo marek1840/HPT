@@ -4,6 +4,7 @@
 var UserData = require('./UserData');
 var Companies = require('./companies');
 
+
 exports.purchase = function (req, res) {
     UserData.findOne({
         email: req.body.email

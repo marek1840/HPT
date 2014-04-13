@@ -17,7 +17,7 @@ exports.simulation = function() {
 		data.forEach(function(singleCompany){
 			company.findAndModify({ name: singleCompany.name },
 				[],
-				{ $set: { stockPrice: generateNewStockPrice(singlCompany.stockPrice) } },
+				{ $set: { stockPrice: generateNewStockPrice(singleCompany.stockPrice) } },
 				function (err) {
 					if (err)
 						return console.log(err);
