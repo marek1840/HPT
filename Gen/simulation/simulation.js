@@ -15,13 +15,29 @@ exports.simulation = function() {
 		if(err)
 			return console.log(err);
 		data.forEach(function(singleCompany){
+			var newStockPrice = generateNewStockPrice(singleCompany.stockPrice);
+			//var time = new Date();
 			company.findAndModify({ name: singleCompany.name },
 				[],
-				{ $set: { stockPrice: generateNewStockPrice(singleCompany.stockPrice) } },
+				{ 	$set: { stockPrice: newStockPrice}, 
+					$push: {history: 
+						{	$each: [{price: newStockPrice, date: new Date()}], 
+							$slice: -16
+						}
+					} 
+				},
 				function (err) {
 					if (err)
 						return console.log(err);
 					});
+			
 		});
+		/*company.findAndModify({ history: {$size: {$gt: 16}} },
+			[],
+			{ $pull: {history: -1}} },//remove first element from array if history have more than 16 elements
+			function (err) {
+				if (err)
+					return console.log(err);
+				});*/
 	}
 )};

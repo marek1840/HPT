@@ -10,21 +10,21 @@ exports.getAll = function (req, res) {
 
 exports.getAllWithLastChange = function (req, res) {
     remote.getAllCompanies(function (companies) {
-    	console.log(companies);
+    	//console.log(companies);
     	companies.map( function(company) {
     		//console.log(company);
+    		//console.log(company.history);
     		if (!(company.history)) {
-    			console.log("no history");
+
     		} else {
-    			//console.log(company.history);
-    			previousPrice = company.history[0].price;
+    			var previousPrice = company.history[company.history.length-2].price;//history[company.history.length-1] == stockPrice
 	    		company.change = (company.stockPrice - previousPrice)/previousPrice
-	    		delete json.history;
-	    		console.log(company);
+	    		delete company.history;
+	    		//console.log(company);
 	    	}
     		return company;
     	});
-    	console.log("send companies with last change");
+    	console.log("send companies with last change to client");
     	//niekiedy blad przy ponownym wysylaniu?
         return res.json(companies);
     });

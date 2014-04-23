@@ -6,13 +6,16 @@ exports.getAllCompanies = function (callback) {
     var client = net.connect({port: 8000}, function () {
         client.write(JSON.stringify({'type': 'getAll'}));
     });
-
-    client.on('data', function (data) {
-        callback(JSON.parse(data.toString()));
-        client.end();
+	var data='';
+    client.on('data', function (chunk) {
+    	data += chunk;
+    	//console.log('received from generator:\n'+chunk);
     });
 
     client.on('end', function () {
+    	console.log('received all companies from generator');
+       	callback(JSON.parse(data.toString()));
+        client.end();
     });
 };
 

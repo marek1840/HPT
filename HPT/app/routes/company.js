@@ -5,7 +5,7 @@ var companies = require('../controllers/companies');
 
 module.exports = function (app) {
 
-    app.get('/companies.json', companies.getAll);
+    app.get('/companies.json', companies.getAllWithLastChange);
 
     // second iteration
     //communicates with generator
