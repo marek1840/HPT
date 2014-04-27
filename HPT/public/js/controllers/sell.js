@@ -29,6 +29,8 @@ angular.module('mean.system').controller('SellController',
                     return keys;
                 };
 
+                $scope.allCompanies = companies;
+
                 $scope.ownedCompanies = companies.filter(function (company) {
                     company.ownedStock = ownedStock[company.name];
                     return ownedStock[company.name] > 0;
@@ -59,6 +61,7 @@ angular.module('mean.system').controller('SellController',
                         }).then(function () {
                             $scope.resp = amount;
                             $scope.sold[companyName] = amount;
+                            $scope.updateOwnedStock();
                         }, function(){
                             $scope.sold[companyName] = -30;
                         });
@@ -78,4 +81,30 @@ angular.module('mean.system').controller('SellController',
             return $scope.sold[companyName] > 0;
         };
 
+        $scope.updateOwnedStock = function (){
+            $http.get('/users/'+current_user+'/stock').success(function (ownedStock) {
+                var ownedStockDict = {};
+                ownedStock.ownedStock.forEach(function(entry){
+                    ownedStockDict[entry.company] = entry.amount;
+                });
+                $scope.allCompanies.forEach(function(company){
+                    company.ownedStock = ownedStockDict[company.name]
+                });
+            });
+        };
+
+        $scope.updateStockPrice = function (){
+            $http.get('/companies.json').success(function (data){
+                var companiesDict = {};
+                data.forEach(function(entry){
+                    companiesDict[entry.name] = entry;
+                });
+                $scope.allCompanies.forEach(function(entry){
+                    entry.stockPrice = companiesDict[entry.name].stockPrice;
+                });
+            });
+        };
+
+        setInterval($scope.updateStockPrice,10000);
     }]);
+

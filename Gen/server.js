@@ -1,9 +1,9 @@
 'use strict';
 require('./model/Companies.js');
 
-var net = require('net'),
-    Company = require('./controllers/Company.js'),
-	Simulate = require('./simulation/simulation.js');
+var net = require('net');
+var company = require('./controllers/Company.js');
+var simulate = require('./simulation/simulation.js');
 
 
 var server = net.createServer(function (c) {
@@ -34,7 +34,7 @@ var server = net.createServer(function (c) {
     });
 });
 
-setInterval(Simulate.simulation, 10000);
+setInterval(simulate.simulation, 10000);
 
 server.listen(8000, function () {
     console.log('server bound');

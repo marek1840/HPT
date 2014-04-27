@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    UserData = mongoose.model('UserData');
+var mongoose = require('mongoose');
+var UserData = mongoose.model('UserData');
 
 exports.data = function (req, res) {
     UserData.findOne({
@@ -12,9 +12,10 @@ exports.data = function (req, res) {
 };
 
 exports.owned = function (req, res) {
-    UserData.findOne({email: req.params.email}, 'ownedStock -_id', function (err, data) {
-        return res.json(data);
-    });
+    UserData.findOne({email: req.params.email}, 'ownedStock -_id', 
+		function (err, data) {
+			return res.json(data);
+		});
 };
 
 exports.updateCapital = function (updateData, callback) {
@@ -52,8 +53,18 @@ exports.updateStock = function (stockData, callback) {
 
             userData.ownedStock.push(stock);
         } else {
-            var amount = userData.ownedStock[index].amount;
-            userData.ownedStock[index].amount = amount + stockData.amount;
+            var amount = userData.ownedStock[index].amount + stockData.amount;
+            if (amount === 0) {
+                //removing entry
+                var v = userData.ownedStock.splice(index, 1)
+                console.log("removed " + v)
+                console.log('remaining: ' + userData.ownedStock)
+            } else {
+                //updating entry
+                userData.ownedStock[index].amount = amount;
+            }
+
+
         }
 
         return userData.save(function (err) {

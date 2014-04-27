@@ -3,27 +3,29 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    consolidate = require('consolidate'),
-    mongoStore = require('connect-mongo')(express),
-    flash = require('connect-flash'),
-    helpers = require('view-helpers'),
-    assetmanager = require('assetmanager'),
-    config = require('./config');
+var express = require('express');
+var consolidate = require('consolidate');
+var mongoStore = require('connect-mongo')(express);
+var flash = require('connect-flash');
+var helpers = require('view-helpers');
+var assetmanager = require('assetmanager');
+var config = require('./config');
 
 module.exports = function(app, passport, db) {
     app.set('showStackError', true);
 
     // Prettify HTML
     app.locals.pretty = true;
-		// cache=memory or swig dies in NODE_ENV=production
-		app.locals.cache = 'memory';
+	
+	// cache=memory or swig dies in NODE_ENV=production
+	app.locals.cache = 'memory';
 
     // Should be placed before express.static
     // To ensure that all assets and data are compressed (utilize bandwidth)
     app.use(express.compress({
         filter: function(req, res) {
-            return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+            return (/json|text|javascript|css/).test(
+					res.getHeader('Content-Type'));
         },
         // Levels are specified in a range of 0 to 9, where-as 0 is
         // no compression and 9 is best compression, but slowest

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('mean.system').controller('PurchaseController',
-    ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
+    ['$scope', '$http', '$location', 'Global', 
+	function ($scope, $http, $location, Global) {
         $scope.global = Global;
 
         var res = $http.get('/companies.json');
@@ -22,6 +23,7 @@ angular.module('mean.system').controller('PurchaseController',
                     keys.push(k);
                 return keys;
             };
+            
             $scope.companies = function () {
                 return data.filter(function (company) {
                     
@@ -63,4 +65,17 @@ angular.module('mean.system').controller('PurchaseController',
             return $scope.purchased[companyName];
         };
 
+        $scope.updateStockPrice = function (){
+            $http.get('/companies.json').success(function (data){
+                var companiesDict = {};
+                data.forEach(function(entry){
+                    companiesDict[entry.name] = entry;
+                });
+                $scope.allCompanies.forEach(function(entry){
+                    entry.stockPrice = companiesDict[entry.name].stockPrice;
+                });
+            });
+        };
+
+        setInterval($scope.updateStockPrice, 10000);
     }]);

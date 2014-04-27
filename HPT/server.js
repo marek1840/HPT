@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    fs = require('fs'),
-    passport = require('passport'),
-    logger = require('mean-logger');
+var express = require('express');
+var fs = require('fs');
+var passport = require('passport');
+var logger = require('mean-logger');
 
 /**
  * Main application entry file.
@@ -20,8 +20,8 @@ process.on('uncaughtException', function (err) {
     console.log(err);
 }); 
 // Initializing system variables 
-var config = require('./config/config'),
-    mongoose = require('mongoose');
+var config = require('./config/config');
+var mongoose = require('mongoose');
 
 // Bootstrap db connection
 var db = mongoose.connect(config.db);

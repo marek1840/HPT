@@ -1,5 +1,5 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost/generator');
 
@@ -15,11 +15,11 @@ CompanySchema.statics.getAll = function (callback) {
 };
 
 CompanySchema.statics.getStockAmount = function (companyName, callback) {
-    this.findOne({name: companyName}, "stockAmount -_id", callback)
+    this.findOne({name: companyName}, 'stockAmount -_id', callback)
 };
 
 CompanySchema.statics.findAndModify = function (query, sort, doc, options, callback) {
     return this.collection.findAndModify(query, sort, doc, options, callback);
 };
 
-var Company = mongoose.model('Company', CompanySchema);
+var company = mongoose.model('Company', CompanySchema);
