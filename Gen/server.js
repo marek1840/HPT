@@ -8,11 +8,16 @@ var simulate = require('./simulation/simulation.js');
 
 var server = net.createServer(function (c) {
     var sendData = function (data) {
+    	//console.log('sending companies:\n'+data);
+    	var r;
         if (typeof data !== 'string') {
-            return c.write(JSON.stringify(data));
+            r = c.write(JSON.stringify(data));
         } else {
-            return c.write(data);
+            r = c.write(data);
         }
+        console.log('end sending data to HPT server');
+        c.end();
+        return r;
     }
 
     c.on('data', function (data) {
