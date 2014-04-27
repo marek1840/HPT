@@ -88,7 +88,7 @@ angular.module('mean.system').controller('SellController',
                     ownedStockDict[entry.company] = entry.amount;
                 });
                 $scope.allCompanies.forEach(function(company){
-                    company.ownedStock = ownedStockDict[company.name]
+                    company.ownedStock = ownedStockDict[company.name];
                 });
             });
         };

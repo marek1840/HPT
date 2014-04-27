@@ -68,7 +68,7 @@ exports.updateStock = function (stockData, callback) {
 
             if (amount === 0) {
                 //removing entry
-                userData.ownedStock.splice(index, 1)
+                userData.ownedStock.splice(index, 1);
             } else {
                 //updating entry
                 userData.ownedStock[index].amount = amount;
