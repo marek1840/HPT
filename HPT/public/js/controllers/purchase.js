@@ -9,6 +9,8 @@ angular.module('mean.system').controller('PurchaseController',
         $scope.companyPrefix = '';
 
         res.success(function (data) {
+
+
             $scope.industries = data.reduce(function (acc, company) {
                 acc[company.industry] = true;
                 return acc;
@@ -20,9 +22,9 @@ angular.module('mean.system').controller('PurchaseController',
                     keys.push(k);
                 return keys;
             };
-
             $scope.companies = function () {
                 return data.filter(function (company) {
+                    
                     return $scope.industries[company.industry];
                 });
             };

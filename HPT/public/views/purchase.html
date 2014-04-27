@@ -26,7 +26,8 @@
             <div class="row">
                 <label class="col-md-2">company</label>
                 <!--<label class="col-md-1">change</label>-->
-                <label class="col-md-1">stockPrice</label>
+                <label class="col-md-2">stockPrice</label>
+                <label class="col-md-2">totalAmount</label>
                 <label class="col-md-2">amount</label>
                 <label class="col-md-1">totalPrice</label>
             </div>
@@ -39,17 +40,18 @@
                 <!--<div class="col-md-1 alert-danger" ng-show="company.change < 0">{{company.change}}</div>-->
                 <!--<div class="col-md-1 alert-success" ng-hide="company.change < 0">{{company.change}}</div>-->
 
-                <div class="col-md-1">{{company.stockPrice}}</div>
+                <div class="col-md-2">{{company.stockPrice}}</div>
+                <div class="col-md-2">{{company.stockAmount}}</div>
 
                 <form class="form-horizontal col-md-2" ng-submit="purchase(company.name)(amount)(amount * company.stockPrice)">
                     <input class="amount" type="number" name="amount" value="0" ng-model="amount">
                     <button class=" label label-success buy">Buy</button>
                 </form>
-                <div class="col-md-1" ng-show="amount > 0">{{amount * company.stockPrice}}</div>
-                <div class=" col-md-1 alert alert-success" ng-show="showPurchased(company.name) > 0">
+                <div class="col-md-1" ng-show="amount <= company.stockAmount && amount > 0">{{amount * company.stockPrice}}</div>
+                <div class=" col-md-1 alert alert-success" ng-show="amount <= company.stockAmount &&showPurchased(company.name) > 0">
                     Bought: {{purchased(company.name)}}
                 </div>
-                <div class=" col-md-1 alert alert-danger" ng-show=" 0 > showPurchased(company.name)">
+                <div class=" col-md-1 alert alert-danger" ng-show="amount > company.stockAmount && 0 > showPurchased(company.name)">
                     failed
                 </div>
 
