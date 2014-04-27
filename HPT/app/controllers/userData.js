@@ -71,11 +71,11 @@ exports.updateStock = function (stockData, callback) {
                 userData.ownedStock.splice(index, 1);
             } else {
                 //updating entry
-                userData.ownedStock[index].amount = amount;
-            }
+            userData.ownedStock[index].amount = amount;
+        }
 
+            //if buying - update average price
             if (stockData.amount > 0) {
-                //if buying - update average price
                 var averagePrice = (userData.ownedStock[index].amount * userData.ownedStock[index].averagePrice +
                     stockData.amount * stockData.averagePrice) / amount;
                 userData.ownedStock[index].averagePrice = averagePrice;

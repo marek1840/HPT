@@ -12,7 +12,6 @@ var stockSchema = new Schema({
 var brokerSchema = new Schema({
     name: String,
     funds: Number,
-    hiredAmount: Number,
     releaseDate: Date
 });
 
