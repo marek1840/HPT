@@ -44,7 +44,7 @@
                 <div class="col-md-1">{{company.ownedStock}}</div>
 
                 <form class="form-horizontal col-md-2" ng-submit="sell(ownedCompanies.indexOf(company))(amount)(amount * company.stockPrice)">
-                    <input class="amount" type="number" name="amount" value="0" ng-model="amount">
+                    <input class="amount" type="number" name="amount" value="0" min="0" max="{{company.ownedStock}}" ng-model="amount">
                     <button class=" label label-success sell">Sell</button>
                 </form>
                 <div class="col-md-2" ng-show="amount > 0">{{amount * company.stockPrice}}</div>

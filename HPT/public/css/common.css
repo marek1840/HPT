@@ -33,3 +33,8 @@ footer {
 footer p {
     padding:5px 0 12px 10px
 }
+
+form.ng-invalid input.ng-invalid {
+   border-color: red;
+   outline-color: red;
+}
