@@ -1,7 +1,7 @@
 'use strict';
 
 //mongoose = require('mongoose'),
-var UserData = require('./UserData');
+var UserData = require('./userData');
 var Companies = require('./companies');
 
 
