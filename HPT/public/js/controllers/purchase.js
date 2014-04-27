@@ -29,6 +29,12 @@ angular.module('mean.system').controller('PurchaseController',
                     return $scope.industries[company.industry];
                 });
             };
+                
+            $scope.setAll = function (all) {
+                $scope.ind().forEach(function (industry) {
+                     $scope.industries[industry] = all;
+                });
+            };
         });
 
         $scope.purchased = {};
