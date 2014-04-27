@@ -45,6 +45,7 @@ angular.module('mean.system').controller('PurchaseController',
                         }).then(function () {
                             $scope.resp = amount;
                             $scope.purchased[companyName] = amount;
+                            $scope.global.updateCapital();
                         }, function () {
                             $scope.purchased[companyName] = -30;
                         });
