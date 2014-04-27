@@ -2,7 +2,7 @@
 require('./model/Companies.js');
 
 var net = require('net');
-var company = require('./controllers/Company.js');
+var Company = require('./controllers/Company.js');
 var simulate = require('./simulation/simulation.js');
 
 
