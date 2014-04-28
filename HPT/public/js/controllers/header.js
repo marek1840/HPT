@@ -12,6 +12,15 @@ angular.module('mean.system').controller('HeaderController',
 				});
 		}
 
+		$scope.global.updateCapital = function () {
+			if ($scope.global.authenticated) {
+				$http.get('/users/' + $scope.global.user.email).success(
+					function (data) {
+						$scope.user.capital = data.capital;
+					});
+			}
+		};
+
 		$scope.menu = [
 			{
 				'title': 'Purchase',

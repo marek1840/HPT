@@ -41,6 +41,12 @@ angular.module('mean.system').controller('SellController',
                         return $scope.industries[company.industry];
                     });
                 };
+                
+                $scope.setAll = function (all) {
+                    $scope.ind().forEach(function (industry) {
+                         $scope.industries[industry] = all;
+                    });
+                };
             });
         });
 
@@ -62,6 +68,7 @@ angular.module('mean.system').controller('SellController',
                             $scope.resp = amount;
                             $scope.sold[companyName] = amount;
                             $scope.updateOwnedStock();
+                            $scope.global.updateCapital();
                         }, function(){
                             $scope.sold[companyName] = -30;
                         });

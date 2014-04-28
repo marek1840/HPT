@@ -3,7 +3,7 @@
 
         <section class="col-md-3">
             <div>
-                <label>Find industry</label>
+                <label>find</label> (<label ng-click="setAll(true)">ALL</label>, <label ng-click="setAll(false)">NONE</label>)
                 <input type="text" ng-model="industryPrefix">
             </div>
 
@@ -44,7 +44,7 @@
                 <div class="col-md-1">{{company.stockAmount}}</div>
 
                 <form class="form-horizontal col-md-2" ng-submit="purchase(company.name)(amount)(amount * company.stockPrice)">
-                    <input class="amount" type="number" name="amount" value="0" ng-model="amount">
+                    <input class="amount" type="number" name="amount" value="0" min="0" ng-model="amount">
                     <button class=" label label-success buy">Buy</button>
                 </form>
                 <div class="col-md-1" ng-show="amount <= company.stockAmount && amount > 0">{{amount * company.stockPrice}}</div>
