@@ -26,7 +26,6 @@ angular.module('mean.system').controller('PurchaseController',
             
             $scope.companies = function () {
                 return data.filter(function (company) {
-                    
                     return $scope.industries[company.industry];
                 });
             };

@@ -7,7 +7,6 @@ module.exports = function (app) {
 
 
     app.get('/companies.json', companies.getAll);
-    //app.get('/companies.json', Companies.getStockAmount);
 
 
     // second iteration

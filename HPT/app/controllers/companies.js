@@ -9,13 +9,6 @@ exports.getAll = function (req, res) {
     });
 };
 
-global.getStockAmount = function (req, res) {
-    remote.getCompanyStockAmount(req, function (companies) {
-
-        return res.json(companies);
-    });
-};
-
 exports.buy = remote.buy;
 
 exports.sell = remote.sell;
