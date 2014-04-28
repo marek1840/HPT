@@ -18,6 +18,20 @@ exports.getAllCompanies = function (callback) {
         client.end();
     });
 };
+exports.getCompanyStockAmount = function (company, callback) {
+    var client = net.connect({port: 8000}, function () {
+        company.type = 'getStockAmount';
+        client.write(JSON.stringify({'type': 'getStockAmount'}));
+    });
+
+    client.on('data', function (data) {
+        callback(JSON.parse(data.toString()));
+        client.end();
+    });
+
+    client.on('end', function () {
+    });
+};
 
 exports.buy = function (toBuy, callback) {
     var client = net.connect({port: 8000}, function () {

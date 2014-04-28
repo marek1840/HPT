@@ -11,6 +11,15 @@ exports.getAll = function (callback) {
     });
 };
 
+exports.getStockAmount = function (amountData, callback) {
+    Company.getStockAmount(amountData.company, function (err, data) {
+        if (err) {
+            return callback([]);
+        }
+        return callback(data);
+    })
+};
+
 exports.buy = function (buyData, callback) {
     company.getStockAmount(buyData.company, function (err, companyData) {
         if (err) {

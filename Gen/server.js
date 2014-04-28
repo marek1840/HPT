@@ -2,7 +2,7 @@
 require('./model/Companies.js');
 
 var net = require('net');
-var company = require('./controllers/Company.js');
+var Company = require('./controllers/Company.js');
 var simulate = require('./simulation/simulation.js');
 
 
@@ -25,12 +25,14 @@ var server = net.createServer(function (c) {
 
         console.log('got ' + JSON.stringify(received))
 
-        if (received.type === 'getAll') {
-            company.getAll(sendData);
-        } else if (received.type === 'buy') {
-            company.buy(received, sendData);
-        } else if (received.type === 'sell') {
-            company.sell(received, sendData);
+        if (received.type === "getAll") {
+            Company.getAll(sendData);
+        } else if (received.type === "getStockAmount") {
+            Company.getStockAmount(received, sendData);
+        } else if (received.type === "buy") {
+            Company.buy(received, sendData);
+        } else if (received.type === "sell") {
+            Company.sell(received, sendData);
         }
     });
     c.on('end', function () {
