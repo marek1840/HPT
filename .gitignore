@@ -6,4 +6,5 @@ server/app/bower_components
 server/heroku
 server//views
 server/dist
+.idea/
 npm-debug.log

@@ -18,9 +18,7 @@ CompanySchema.statics.getAll = function (callback) {
     this.find({}, 'name industry stockPrice history stockAmount -_id', callback)
 };
 
-CompanySchema.statics.getStockAmount = function (companyName, callback) {
-    this.findOne({name: companyName}, 'stockAmount -_id', callback)
-};
+
 
 CompanySchema.statics.findAndModify = function (query, sort, doc, options, callback) {
     return this.collection.findAndModify(query, sort, doc, options, callback);

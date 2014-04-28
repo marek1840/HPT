@@ -27,8 +27,6 @@ var server = net.createServer(function (c) {
 
         if (received.type === "getAll") {
             Company.getAll(sendData);
-        } else if (received.type === "getStockAmount") {
-            Company.getStockAmount(received, sendData);
         } else if (received.type === "buy") {
             Company.buy(received, sendData);
         } else if (received.type === "sell") {

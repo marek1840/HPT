@@ -7,6 +7,8 @@ module.exports = function (app) {
 
     app.get('/companies.json', companies.getAllWithLastChange);
 
+    app.get('/companies.json', companies.getAll);
+
     // second iteration
     //communicates with generator
     // app.get('/:company/history', function(req, res))
