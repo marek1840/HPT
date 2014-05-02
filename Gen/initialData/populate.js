@@ -3,7 +3,7 @@ require('../model/Companies.js');
 var mongoose = require('mongoose'),
     Company = mongoose.model('Company');
     
-var companyNumber = 103;
+var companyNumber = 106;
 
 var companies = [new Company({name: "Tech Data Corporation", industry: "Securities", stockPrice: 387, stockAmount: 1480, history: [{ date: new Date(), price: 1480}]}),
  new Company({name: "Quintiles Transnational", industry: "Pharmaceuticals", stockPrice: 1022, stockAmount: 974, history: [{ date: new Date(), price: 974}]}),
