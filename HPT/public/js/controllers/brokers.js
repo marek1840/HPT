@@ -8,8 +8,6 @@ angular.module('mean.system').controller('BrokersController',
         $scope.global = Global;
         var current_user = $scope.global.user.email;
         $scope.type = 'allBroker';
-        $scope.list= [];
-        $scope.failure = 
 	
 		$scope.startBroker = function () {
 			var amount = $scope.amount;
