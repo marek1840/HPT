@@ -1,3 +1,32 @@
 <section data-ng-controller="BrokersController">
-    <h1>BROKERS</h1>
+    <div class="row">
+
+        <section class="col-md-12 brokers">
+            <div class="row">
+                <label class="col-md-2">broker type</label>
+                <label class="col-md-2">amount to invest</label>
+                <label class="col-md-2">retainer time in seconds</label>
+                <label class="col-md-2">satisfactory profit in %</label>
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-md-2">AllBroker</div> -->
+                <form class="form-horizontal col-md-2">
+                   	<input type="radio" ng-model="type" value="allBroker"> AllBroker<br/>
+				  	<input type="radio" ng-model="type" value="mostStockBroker"> MostStockBroker<br/>
+                </form>
+                
+                <form class="form-horizontal col-md-2">
+                    <input class="amount" type="number" name="amount" value="0" min="0" ng-model="amount">
+                </form>
+                <form class="form-horizontal col-md-2">
+                    <input class="time" type="number" name="time" value="0" min="0" ng-model="time">
+                </form>
+                <form class="form-horizontal col-md-2">
+                    <input class="profit" type="number" name="profit" value="0" min="0" ng-model="profit">
+                </form>
+            </div>
+           
+        </section>
+    </div>
 </section>

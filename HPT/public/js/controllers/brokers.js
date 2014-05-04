@@ -5,4 +5,10 @@ angular.module('mean.system').controller('BrokersController',
 	function ($scope, $http, $location, Global) {
         $scope.global = Global;
         var current_user = $scope.global.user.email;
+        $scope.type = 'allBroker';
+	
+		$scope.startBroker = function () {
+			
+		}
+
     }]);
