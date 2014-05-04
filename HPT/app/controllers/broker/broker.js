@@ -84,7 +84,9 @@ function buy (company, amount, price) {
 		function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				console.log('bought')
-			}
+			}else{
+                console.log('error on buy ' + JSON.stringify(error))
+            }
 		}
 	);
 }
@@ -95,7 +97,9 @@ function sell (company, amount, price) {
 		function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				console.log('sold')
-			}
+			}else{
+                console.log('error on sell ' + JSON.stringify(error))
+            }
 		}
 	);
 }
