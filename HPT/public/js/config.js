@@ -20,9 +20,9 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         url: '/',
         templateUrl: 'views/index.html'
     })
-      .state('agents', {
-        url: '/agents',
-        templateUrl: 'views/agents.html'
+      .state('brokers', {
+        url: '/brokers',
+        templateUrl: 'views/brokers.html'
     })
       ;
 }
