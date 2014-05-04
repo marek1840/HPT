@@ -12,17 +12,17 @@
             <div class="row">
                 <!-- <div class="col-md-2">AllBroker</div> -->
                 <form class="form-horizontal col-md-2">
-                   	<input type="radio" ng-model="type" value="allBroker"> AllBroker<br/>
-				  	<input type="radio" ng-model="type" value="mostStockBroker"> MostStockBroker<br>
+                   	<input type="radio" ngChecked="checked" ng-model="type" value="all"> AllBroker<br/>
+				  	<input type="radio" ng-model="type" value="most"> MostStockBroker<br>
                 </form>
-                
+
                 <form class="form-horizontal col-md-2">
                     <input class="amount" type="number" name="amount" value="0" min="0" ng-model="amount">
                 </form>
                 <form class="form-horizontal col-md-2">
                     <input class="time" type="number" name="time" value="0" min="0" ng-model="time">
                 </form>
-                <form class="form-horizontal col-md-3" ng-submit = "startBroker()">
+                <form class="form-horizontal col-md-3" ng-submit = "hire(type, amount, time, profit)">
                     <input class="profit" type="number" name="profit" value="0" min="0" ng-model="profit">
                     <button class=" label label-success buy">Hire</button>
                 </form>

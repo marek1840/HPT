@@ -1,14 +1,16 @@
+'use strict';
+
 //potrzebna jest instalacja dodatkowego modulu
 //npm install request
 
 var http = require('http');
-var generator = require('./../app/controllers/generatorConnection');
-var userData = require('./../app/controllers/userData');
+var generator = require('./../generatorConnection');
+var userData = require('./../userData');
 var mongoose = require('mongoose');
 var request = require('request');
 
 var name = '';
-var strategy = {};
+var strategy = function(){};
 var cash = 0;
 var end = 0;
 var counter = 0;
@@ -81,7 +83,7 @@ function buy (company, amount, price) {
 		{ json: {"email":name,"company":company,"amount":amount,"cost":amount*price} },
 		function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-				//console.log('bought')
+				console.log('bought')
 			}
 		}
 	);
@@ -92,7 +94,7 @@ function sell (company, amount, price) {
 		{ json: {"email":name,"company":company,"amount":amount,"cost":amount*price} },
 		function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-				//console.log('sold')
+				console.log('sold')
 			}
 		}
 	);

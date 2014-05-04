@@ -1,4 +1,4 @@
-require('./../app/models/userData.js');
+require('./../../models/userData.js');
 var strategies = require('./strategies.js');
 
 var Broker = require('./broker.js');
