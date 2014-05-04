@@ -13,7 +13,7 @@
                 <!-- <div class="col-md-2">AllBroker</div> -->
                 <form class="form-horizontal col-md-2">
                    	<input type="radio" ng-model="type" value="allBroker"> AllBroker<br/>
-				  	<input type="radio" ng-model="type" value="mostStockBroker"> MostStockBroker<br/>
+				  	<input type="radio" ng-model="type" value="mostStockBroker"> MostStockBroker<br>
                 </form>
                 
                 <form class="form-horizontal col-md-2">
@@ -22,8 +22,9 @@
                 <form class="form-horizontal col-md-2">
                     <input class="time" type="number" name="time" value="0" min="0" ng-model="time">
                 </form>
-                <form class="form-horizontal col-md-2">
+                <form class="form-horizontal col-md-3" ng-submit = "startBroker()">
                     <input class="profit" type="number" name="profit" value="0" min="0" ng-model="profit">
+                    <button class=" label label-success buy">Hire</button>
                 </form>
             </div>
            
