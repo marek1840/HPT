@@ -29,6 +29,10 @@ angular.module('mean.system').controller('HeaderController',
 			{
 				'title': 'Sell',
 				'link': 'sell'
+			},
+			{	
+				'title': 'Agents',
+				'link' : 'agents'
 			}
 		];
 
