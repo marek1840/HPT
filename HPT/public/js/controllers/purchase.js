@@ -22,6 +22,8 @@ angular.module('mean.system').controller('PurchaseController',
                     keys.push(k);
                 return keys;
             };
+
+            $scope.allCompanies = data;
             
             $scope.companies = function () {
                 return data.filter(function (company) {
@@ -78,6 +80,7 @@ angular.module('mean.system').controller('PurchaseController',
                 });
                 $scope.allCompanies.forEach(function(entry){
                     entry.stockPrice = companiesDict[entry.name].stockPrice;
+                    entry.change = companiesDict[entry.name].change;
                 });
             });
         };

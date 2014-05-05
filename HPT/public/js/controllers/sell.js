@@ -108,6 +108,7 @@ angular.module('mean.system').controller('SellController',
                 });
                 $scope.allCompanies.forEach(function(entry){
                     entry.stockPrice = companiesDict[entry.name].stockPrice;
+                    entry.change = companiesDict[entry.name].change;
                 });
             });
         };
